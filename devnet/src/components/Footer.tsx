@@ -25,7 +25,7 @@ export default function Footer() {
               <div className="flex space-x-6">
                 {/* Twitter */}
                 <a 
-                  href="https://twitter.com/krish" 
+                  href="https://x.com/krish153660" 
                   className="group flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full hover:bg-blue-600 transition-all duration-300"
                   aria-label="Twitter"
                 >
@@ -36,7 +36,7 @@ export default function Footer() {
 
                 {/* GitHub */}
                 <a 
-                  href="https://github.com/krish" 
+                  href="https://github.com/krishkumar1577" 
                   className="group flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full hover:bg-gray-700 transition-all duration-300"
                   aria-label="GitHub"
                 >
@@ -47,7 +47,7 @@ export default function Footer() {
 
                 {/* LinkedIn */}
                 <a 
-                  href="https://linkedin.com/in/krish" 
+                  href="https://www.linkedin.com/in/krishdevx" 
                   className="group flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full hover:bg-blue-700 transition-all duration-300"
                   aria-label="LinkedIn"
                 >
@@ -58,7 +58,7 @@ export default function Footer() {
 
                 {/* Email */}
                 <a 
-                  href="mailto:hello@krish.dev" 
+                  href="mailto:xdevkrish@gmail.com" 
                   className="group flex items-center justify-center w-12 h-12 bg-neutral-800 rounded-full hover:bg-green-600 transition-all duration-300"
                   aria-label="Email"
                 >
