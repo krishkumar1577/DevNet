@@ -24,3 +24,21 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: 'Quetine';
+  src: url('/fonts/Quetine.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Quetine';
+  src: url('/fonts/Quetine.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.font-quetine {
+  font-family: 'Quetine', serif;
+}
