@@ -2,12 +2,22 @@
 
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import Timeline from "@/components/TimeLine";
+import { getAllPosts } from '@/Content'
+import { Post2Hero, Post2Compact } from '@/components/post'
+
+
+
 export default function Home() {
+  const posts = getAllPosts()
+  const featuredPost = posts[0] // First post as featured
+
   return (
     <div>
       <div className="container mx-auto px-5">
-        <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-2" >
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8 ">
+        {/* Hero Section */}
+        <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-2">
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
             Blog
           </h1>
           {/* <TextExplosion 
@@ -19,7 +29,8 @@ export default function Home() {
           </h2>
         </section>
 
-        <section className="mt-16">
+        {/* Featured Post Section do this is hardcoded part for future refrence */}
+        {/* <section className="mt-16">
           <div className=" mb-8 md:md-16">
             <div className="sm:mx-0">
               <a
@@ -73,10 +84,14 @@ export default function Home() {
                   <div className="text-xl font-bold">Krish</div>
                 </div>
               </div>
-            
           </div>
-        </section>
+        </section> */}
+        {/* Featured Post using Post2Hero */}
+        {featuredPost && <Post2Hero post={featuredPost} className="mt-16" />}
 
+
+
+        {/* More Posts Section */}
         <section>
           <h2 className="mb-8 text-6xl md:text-7xl text-bold tracking-tighter leading-tight">More Post</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
@@ -134,12 +149,38 @@ export default function Home() {
                   <div className="text-xl font-bold">Krish</div>
                 </div>
             </div>
-                      
           </div>
         </section>
+        {/* <section>
+          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">More Post</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
+            {posts.slice(1).map(post => (
+              <a key={post._id} href={`/posts/${post._slug}`}>
+                <Post2Compact post={post} />
+              </a>
+            ))}
+          </div>
+        </section> */}
       </div>
 
-      <Newsletter />
+      
+      <div className="mb-16">
+        <Newsletter />
+      </div>
+              {/* Timeline Section */}
+        <section >
+          <div className="rounded-2xl pb-8 md:pb-12">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4">
+                Timeline
+              </h2>
+            </div>
+            
+            <div className="flex justify-center">
+              <Timeline />
+            </div>
+          </div>
+        </section>
       <Footer />
     </div>
   );
