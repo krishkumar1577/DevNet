@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   description: "Join me on my development journey as I share insights about web development, Next.js, React, and modern tech stacks. Discover tutorials, project breakdowns, and developer experiences.",
   icons: {
     icon: [
-      { url: '/K.png' },
       { url: '/K.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: '16x16', type: 'image/x-icon' },
     ],
     apple: '/K.png',
     shortcut: '/K.png',
