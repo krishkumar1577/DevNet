@@ -9,10 +9,6 @@ import {
   useRef,
   createRef,
   useCallback,
-  useMemo,
-  type CSSProperties,
-  useId,
-  type RefObject,
 } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 
