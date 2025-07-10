@@ -25,7 +25,7 @@ export default function Home() {
             className="w-96 h-96"
           /> */}
           <h2 className="text-center md:text-left text-lg mt-5 md:pl-8 hover:underline ">
-            <Link href="/posts" >By Krish.</Link>
+            <Link href="/posts" >View More</Link>
           </h2>
         </section>
 
@@ -156,7 +156,7 @@ export default function Home() {
           <h2 className="mb-8 text-6xl md:text-7xl text-bold tracking-tighter leading-tight">More Post</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
             {posts.slice(1).map(post => (
-                <Post2Compact post={post} />
+                <Post2Compact key={post._id} post={post} />
             ))}
           </div>
         </section>
