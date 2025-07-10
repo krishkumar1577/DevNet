@@ -3,9 +3,9 @@
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 import Timeline from "@/components/TimeLine";
-import { getAllPosts } from '@/Content'
+import { getAllPosts } from '@/content'
 import { Post2Hero, Post2Compact } from '@/components/post'
-
+import Link from "next/link"
 
 
 export default function Home() {
@@ -24,8 +24,8 @@ export default function Home() {
             text="By Krish" 
             className="w-96 h-96"
           /> */}
-          <h2 className="text-center md:text-left text-lg mt-5 md:pl-8">
-            By Krish.
+          <h2 className="text-center md:text-left text-lg mt-5 md:pl-8 hover:underline ">
+            <Link href="/posts" >By Krish.</Link>
           </h2>
         </section>
 
@@ -92,7 +92,7 @@ export default function Home() {
 
 
         {/* More Posts Section */}
-        <section>
+        {/* <section>
           <h2 className="mb-8 text-6xl md:text-7xl text-bold tracking-tighter leading-tight">More Post</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
             <div>
@@ -150,17 +150,16 @@ export default function Home() {
                 </div>
             </div>
           </div>
-        </section>
-        {/* <section>
-          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">More Post</h2>
+        </section> */}
+        
+        <section>
+          <h2 className="mb-8 text-6xl md:text-7xl text-bold tracking-tighter leading-tight">More Post</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
             {posts.slice(1).map(post => (
-              <a key={post._id} href={`/posts/${post._slug}`}>
                 <Post2Compact post={post} />
-              </a>
             ))}
           </div>
-        </section> */}
+        </section>
       </div>
 
       

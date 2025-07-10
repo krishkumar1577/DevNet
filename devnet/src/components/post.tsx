@@ -191,7 +191,6 @@ export default function Post({
 }
 
 // Compact version for previews
-// Compact version for previews - Updated to match hardcoded UI
 export function Post2Compact({
   post,
   className = "",
@@ -287,20 +286,24 @@ export function Post2Hero({
       {/* Cover Image */}
       {coverImage && (
         <div className="mb-8 md:mb-16">
-          <PostCoverImage
-            title={_title}
-            url={coverImage.url}
-            width={1500}
-            height={1000}
-            className="max-h-[50vh] min-h-[300px]"
-            priority
-          />
+          <a href={`/posts/${post._slug}`} aria-label={_title}>
+            <PostCoverImage
+              title={_title}
+              url={coverImage.url}
+              width={1500}
+              height={1000}
+              className="max-h-[50vh] min-h-[300px]"
+              priority
+            />
+          </a>
         </div>
       )}
 
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
-          <h1 className="mb-4 text-4xl lg:text-6xl leading-tight font-bold">{_title}</h1>
+          <h1 className="mb-4 text-4xl lg:text-6xl leading-tight text-bold"><a href={`/posts/${post._slug}`} className="hover:underline">
+          {_title}
+          </a></h1>
           <div className="mb-4 md:mb-0">
             <PostDate dateString={date} />
           </div>
