@@ -1,92 +1,77 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
 import { Post2Fragment } from '@/components/post'
 
-export const posts: Post2Fragment[] = [
-  {
-    _id: "1",
-    _slug: "my-first-post",
-    _title: "My First Blog Post",
-    author: {
-      _title: "Krish",
-      avatar: {
-        url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face", // Example avatar
-        alt: "Krish Avatar"
-      }
-    },
-    coverImage: {
-      url: "https://assets.basehub.com/17c993ed/eef3e09488df08e94c2129fbc59e9474/image.png",
-      alt: "My First Post Cover"
-    },
-    date: "2024-12-09",
-    excerpt: "Welcome to my first blog post! Learning MDX and Next.js.",
-    content: `# My First Blog Post
-
-Welcome to my **first** blog post! This is written in MDX.
-
-## What I'm Learning
-
-I'm learning how to build a blog with:
-- Next.js
-- MDX
-- TypeScript
-- Tailwind CSS
-
-## Code Example
-
-\`\`\`javascript
-const greeting = "Hello World!";
-console.log(greeting);
-\`\`\`
-
-## My Thoughts
-
-This is pretty cool! I can write markdown and it becomes a beautiful blog post.
-
-*More content coming soon...*`
-  },
-  // You can add more posts here
-  {
-    _id: "2",
-    _slug: "second-post",
-    _title: "Learning React Components",
-    author: {
-      _title: "Krish",
-      avatar: {
-        url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-        alt: "Krish Avatar"
-      }
-    },
-    coverImage: {
-      url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop",
-      alt: "React Code Cover"
-    },
-    date: "2024-12-10",
-    excerpt: "Diving deeper into React components and state management.",
-    content: `# Learning React Components
-
-Today I'm exploring React components and how they work.
-
-## Key Concepts
-
-- **Props**: Data passed to components
-- **State**: Internal component data
-- **Hooks**: React's way of managing state and effects
-
-## Example Component
-
-\`\`\`jsx
-function Welcome({ name }) {
-  return <h1>Hello, {name}!</h1>;
-}
-\`\`\`
-
-This is getting exciting!`
-  }
-]
-
-export function getPostBySlug(slug: string): Post2Fragment | undefined {
-  return posts.find(post => post._slug === slug)
-}
+const postsDirectory = path.join(process.cwd(), 'src/content/posts')
 
 export function getAllPosts(): Post2Fragment[] {
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  // Get file names under /posts
+  const fileNames = fs.readdirSync(postsDirectory)
+  
+  const allPostsData = fileNames
+    .filter(fileName => fileName.endsWith('.mdx'))
+    .map(fileName => {
+      // Remove ".mdx" from file name to get slug
+      const slug = fileName.replace(/\.mdx$/, '')
+
+      // Read markdown file as string
+      const fullPath = path.join(postsDirectory, fileName)
+      const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents)
+
+      return {
+        _id: slug,
+        _slug: slug,
+        _title: matterResult.data.title,
+        author: {
+          _title: "Krish",
+          avatar: {
+            url: "/image.png",
+            alt: "Krish Avatar"
+          }
+        },
+        coverImage: {
+          url: matterResult.data.coverImage || "https://images.unsplash.com/photo-1629467201248-e625add6dd57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          alt: matterResult.data.coverImageAlt || "Cover Image"
+        },
+        date: matterResult.data.date,
+        excerpt: matterResult.data.summary || matterResult.data.excerpt,
+        content: matterResult.content
+      } as Post2Fragment
+    })
+
+  return allPostsData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+export function getPostBySlug(slug: string): Post2Fragment | undefined {
+  try {
+    const fullPath = path.join(postsDirectory, `${slug}.mdx`)
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+    const matterResult = matter(fileContents)
+
+    return {
+      _id: slug,
+      _slug: slug,
+      _title: matterResult.data.title,
+      author: {
+        _title: "Krish",
+        avatar: {
+          url: "/image.png",
+          alt: "Krish Avatar"
+        }
+      },
+      coverImage: {
+        url: matterResult.data.coverImage || "https://images.unsplash.com/photo-1629467201248-e625add6dd57?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        alt: matterResult.data.coverImageAlt || "Cover Image"
+      },
+      date: matterResult.data.date,
+      excerpt: matterResult.data.summary || matterResult.data.excerpt,
+      content: matterResult.content
+    } as Post2Fragment
+  } catch (error) {
+    return undefined
+  }
 }

@@ -65,11 +65,14 @@ const ChevronUp = ({ size = 16 }: { size?: number }) => (
 
 // Types and Interfaces
 interface TimelineItem {
-  id: number;
-  date: string;
+  id: number; 
+  date: string; // Fix typo: was "ate" should be "date"
   title: string;
   content: string;
   hasTable?: boolean;
+  slug?: string;
+  isBlogPost?: boolean;
+  isProjectMilestone?: boolean;
 }
 
 interface VisibleRange {
@@ -190,44 +193,50 @@ function useTimeline(isMobile: boolean, isTablet: boolean) {
   const initialTimelineData: TimelineItem[] = [
     {
       id: 1,
-      date: "Jul 5, 2025",
-      title: "Post about Mountains",
-      content:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      date: "Jul 12, 2025",
+      title: "Who I Am",
+      content: "This is not just a blog post — it's a footprint of who I am, where I'm headed, and what I stand for. A declaration, a trailer, and a bit of a challenge.",
+      slug: "Who-I-am",
+      isBlogPost: true,
     },
     {
       id: 2,
-      date: "Jul 7, 2025",
-      title: "The Dark Side",
-      content:
-        "Discover how embracing your ambition and harnessing your emotions can lead to unprecedented power and success in your career and personal endeavors.",
+      date: "Jul 10, 2025",
+      title: "Building My First Next.js App",
+      content: "My journey building this blog with Next.js 14, the mistakes I made, and what I learned along the way. From routing confusion to deployment success.",
+      slug: "building-my-first-nextjs-app",
+      isBlogPost: true,
     },
     {
       id: 3,
-      date: "Jul 9, 2025",
-      title: "The Ambination",
-      content:
-        "Backend development and API integration according to technical specifications.",
-      hasTable: true,
+      date: "Jul 8, 2025",
+      title: "My Developer Routine",
+      content: "How I structure my days to maximize coding productivity, learning, and still have a life. From 6 AM workouts to 1 AM wind-down.",
+      slug: "Daily-Routine",
+      isBlogPost: true,
     },
     {
       id: 4,
-      date: "Jul 10, 2025",
-      title: "Testing & Deployment",
-      content:
-        "Performance optimization and final quality assurance before release.",
+      date: "Dec 9, 2024",
+      title: "My First Blog Post",
+      content: "Welcome to my first blog post! Learning MDX and Next.js. This marks the beginning of my journey into web development and content creation.",
+      slug: "my-first-post",
+      isBlogPost: true,
     },
     {
       id: 5,
-      date: "Jul 12, 2025",
-      title: "Launch",
-      content: "Product launch and market rollout with monitoring systems.",
+      date: "Jun 15, 2025",
+      title: "DevNet Blog Launched ",
+      content: "Built and launched my personal blog using Next.js, MDX, and Tailwind CSS. This marks the beginning of my journey building in public.",
+      isProjectMilestone: true,
     },
     {
       id: 6,
-      date: "Jul 15, 2025",
-      title: "Post-Launch",
-      content: "User feedback collection and iterative improvements.",
+      date: "Jul 1, 2025",
+      title: "Started PulseStack ",
+      content: "Beginning work on PulseStack - a full-stack project to showcase my development skills and learn new technologies.",
+      isProjectMilestone: true,
+      hasTable: true,
     },
   ];
 
@@ -433,6 +442,7 @@ function TimelineStep({
   );
 }
 
+// Update TimelineContent component around line 447
 function TimelineContent({
   step,
   contentVariants,
@@ -462,10 +472,32 @@ function TimelineContent({
           className="flex justify-between items-center mb-4"
           variants={contentChildrenVariants}
         >
-          <h3 className="text-lg md:text-xl font-medium text-white">
-            {step.title}
-          </h3>
+          <div className="flex items-center gap-3">
+            <h3 className="text-lg md:text-xl font-medium text-white">
+              {step.title}
+            </h3>
+            {step.isBlogPost && (
+              <span className="px-2 py-1 text-xs bg-blue-600 text-white rounded-full">
+                📝 Blog Post
+              </span>
+            )}
+            {step.isProjectMilestone && (
+              <span className="px-2 py-1 text-xs bg-green-600 text-white rounded-full">
+                🎯 Milestone
+              </span>
+            )}
+          </div>
           <div className="flex items-center gap-2">
+            {step.slug && (
+              <motion.a
+                href={`/posts/${step.slug}`}
+                className="px-3 py-1 text-sm bg-white text-black rounded-md hover:bg-gray-200 transition-colors font-medium"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Read Post →
+              </motion.a>
+            )}
             <motion.button
               onClick={onClose}
               className="text-gray-400 hover:text-white transition-colors"
@@ -487,6 +519,14 @@ function TimelineContent({
             layout
           >
             <p className="text-sm md:text-base">{step.content}</p>
+            
+            {step.isBlogPost && (
+              <div className="mt-3 pt-3 border-t border-gray-800">
+                <p className="text-xs text-gray-500">
+                  Click "Read Post" to see the complete article with code examples and detailed insights.
+                </p>
+              </div>
+            )}
           </motion.div>
 
           {step.hasTable && (
