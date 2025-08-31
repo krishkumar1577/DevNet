@@ -1,0 +1,274 @@
+---
+title: "Building SponZilla: When I Got Tired of Watching Clubs Struggle"
+date: "2025-08-31"
+summary: "The story behind my latest project - a campus sponsorship platform that actually works. No corporate BS, just real solutions."
+coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+coverImageAlt: "Students collaborating on campus"
+---
+
+# SponZilla — The Project I Built Instead of Complaining
+
+Remember that feeling when you see a problem **everywhere** and think *"Someone should fix this"*?
+
+Yeah, that was me watching student clubs at my university send dozens of cold emails, begging for sponsorships.
+
+So I built **SponZilla** — a platform where clubs actually find sponsors, and brands actually find students worth sponsoring.
+
+---
+
+## Where It Really Started
+
+Picture this: You're running a robotics club. You've got 200+ members, organizing hackathons, building actual robots. But you're broke.
+
+So you do what everyone does:
+- Send 50+ emails to random companies
+- Wait weeks for "we'll get back to you" 
+- Create the same pitch deck for the 15th time
+- Get ignored by 90% of prospects
+
+Meanwhile, brands are literally **paying agencies thousands** to "connect with Gen Z" when there are engaged student communities right there.
+
+**The disconnect was painful to watch.**
+
+---
+## 💡 What I Built Instead
+
+SponZilla is basically **Tinder for sponsorships** (but actually useful).
+
+Clubs list their events. Brands browse and connect. Everyone wins.
+
+But here's what makes it different from just "another marketplace":
+
+### 🤖 AI Pitch Deck Generator
+One click. Boom. Professional pitch deck.
+
+I got tired of seeing clubs spend hours on PowerPoint when they should be organizing events. So I built an AI that creates compelling presentations automatically.
+
+You input:
+- Event details
+- Expected attendance  
+- Budget needs
+
+You get:
+- Professional slides
+- Market analysis
+- ROI projections
+- Brand partnership options
+
+### 📊 Smart Analytics (For Both Sides)
+**Clubs see:** Which brands are most active, what types of events get funded, success rates by category.
+
+**Brands see:** Audience demographics, engagement metrics, event ROI data.
+
+No more guessing. Just data.
+
+### 🎯 Intelligent Matching
+Built a simple algorithm that actually works:
+
+```typescript
+const matchScore = {
+  industryAlignment: checkIndustryMatch(club, brand),
+  audienceOverlap: calculateAudienceMatch(club.members, brand.targetDemo),
+  budgetCompatibility: compareBudgets(event.cost, brand.sponsorshipRange),
+  pastSuccessRate: analyzePreviousPartnerships(brand, club.category)
+};
+```
+
+---
+
+Translation:
+```ts
+const sponsorshipFlow = {
+  current: ['coldEmail', 'wait', 'followUp', 'silence'],
+  emotion: 'tired',
+  waste: 'time+energy'
+};
+```
+
+I wanted: publish → discoverable → evaluated → response → track.
+
+---
+
+---
+
+## What I Chose To Build (First)
+
+- Role‑based auth (club / brand)
+- Event listing + lightweight profile credibility
+- Application + contact flow
+- Basic matching (readable weights)
+
+Then only after that worked: AI pitch deck + simple analytics.
+
+Not building everything at once is the reason this exists.
+
+---
+
+---
+
+## Feature Snapshots (Human, Not Hype)
+
+🧠 AI Pitch Deck — Input event basics → get a structured narrative. It’s a *starter*, not magic. Saves “blank slide paralysis.”
+
+📊 Analytics (v1) — Top viewed events, category interest, basic interaction counts. Enough signal to feel alive.
+
+🎯 Matching — Weighted scoring you can read:
+```ts
+score = (industry*0.3) + (audience*0.25) + (budget*0.25) + (history*0.2)
+```
+If it needs a diagram, it’s too fancy (for now).
+
+---
+
+---
+
+## Tech Stack (Picked for Momentum)
+
+- React + TypeScript — Fewer “what is this?” moments
+- Tailwind CSS — Design by composition
+- Vite — Fast loops = less context switching
+- Vercel — Deploy → test with real people fast
+
+Tiny reusable pattern:
+```tsx
+function Section<T>({ title, items, render }: { title: string; items: T[]; render: (i: T)=>React.ReactNode }) {
+  if (!items.length) return null;
+  return <section><h3>{title}</h3><ul>{items.map(render)}</ul></section>;
+}
+```
+
+---
+
+## Timeline (Condensed)
+
+## Week 1: Research Phase
+Talked to 15+ club leaders. Key insights:
+- Everyone hates the current process
+- Most gave up after 10 rejections
+- Success rate was roughly 8%
+
+### Week 2-3: Core Features
+Built the MVP:
+- Club registration
+- Event listing
+- Basic brand browsing
+- Contact system
+
+### Week 4-5: The Fun Stuff
+- AI pitch deck generator
+- Analytics dashboard
+- Smart matching algorithm
+- Mobile-responsive design
+
+### Week 6: Reality Check
+User testing revealed people **loved** the AI pitch deck feature but found the matching algorithm too complex.
+
+
+Simplified. Made it work.
+
+
+
+---
+
+---
+
+## Real Moments
+
+- First club: “Wait, I don’t have to rebuild the deck?”
+- First brand: “At least I can *filter* now.”
+- First bug report: wrong role redirect loop at 1:12 AM.
+
+These are the fuel more than numbers.
+
+---
+
+---
+
+## Current Friction (Still There)
+
+- Verification flow is manual
+- Matching doesn’t learn yet
+- Deck export could be prettier
+- Mobile interaction polish pending
+
+Leaving some edges rough keeps iteration honest.
+
+---
+
+---
+
+## What’s Next (Pragmatic)
+
+Short term:
+- Better filtering
+- Payment / commitment signals
+- Mobile navigation improvements
+
+Later:
+- Learning scoring (not buzzword ML)
+- Post‑event impact summaries
+- Region tagging
+
+Maybe:
+- Reputation layer (careful before doing this)
+
+Not now:
+- Blockchain contracts
+- Overdone gamification
+
+---
+
+## Lessons (Sharp + Useful)
+
+- Time saved for users is the real feature
+
+- Cutting scope is a growth hack
+
+Personal: momentum beats motivation 10/10.
+
+---
+
+---
+
+## Code That Mirrors The Build
+
+```ts
+const sponzilla: Project = {
+  name: 'SponZilla',
+  builtBy: 'Krish',
+  focus: ['clarity', 'speed', 'real use'],
+  core: ['events', 'matching', 'apps'],
+  enhancements: ['aiDeck', 'analytics'],
+  status: 'iterating',
+  fuel: ['coffee', 'feedback', 'small wins']
+};
+```
+
+---
+
+---
+
+## Try / Fork / Break
+
+Live: https://sponzilla.vercel.app  
+Repo: https://github.com/krishkumar1577/SponZilla
+
+Demo creds:
+- Club: `club@example.com` / `clubpass123`
+- Brand: `brand@example.com` / `brandpass123`
+
+```bash
+git clone https://github.com/krishkumar1577/SponZilla.git
+cd SponZilla
+npm install
+npm run dev
+```
+
+
+---
+
+Good student projects shouldn’t die because the right sponsor never saw them.
+
+I’m building the bridge.
+
+*Still shipping. Still learning.*

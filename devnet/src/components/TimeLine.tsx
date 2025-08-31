@@ -237,6 +237,13 @@ function useTimeline(isMobile: boolean, isTablet: boolean) {
       content: "Beginning work on PulseStack - a full-stack project to showcase my development skills and learn new technologies.",
       isProjectMilestone: true,
       hasTable: true,
+    },{
+      id: 7,
+      date: "Aug 31, 2025",
+      title: "Building SponZilla",
+      content: "A Campus sponsorship platform: student clubs list events, brands see analytics, auto-pitch deck gen via AI",
+      slug: "sponzilla-campus-sponsorship",
+      isBlogPost: true,
     },
   ];
 

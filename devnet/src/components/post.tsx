@@ -177,7 +177,7 @@ export default function Post({
       </div>
 
       {/* MDX Content */}
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto">
         <div className="prose dark:prose-invert prose-lg max-w-none">
           <MDXRemote 
             source={content} 
